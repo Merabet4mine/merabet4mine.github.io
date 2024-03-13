@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.yatechnologies.yassirfoodclient.preprod",
+    "sha256_cert_fingerprints":
+    ["92:36:37:E0:AF:DF:F8:9B:49:34:F9:52:E7:87:D9:21:60:60:7C:FC:C0:C8:1C:94:5D:B4:21:DA:22:AD:76:26"]
+  }
+}]
