@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة تكلفة استيراد السيارات - الجزائر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-800 mb-2">حاسبة تكلفة استيراد السيارات من الصين</h1>
+            <p class="text-gray-600 text-lg">أداة لحساب التكلفة الإجمالية لاستيراد السيارات إلى الجزائر</p>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- نموذج الإدخال -->
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-car-side text-blue-600 mr-2"></i> بيانات السيارة والتكاليف
+                    </h2>
+                    
+                    <form id="carForm" class="space-y-6">
+                        <!-- قسم التكاليف -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-3">💰 التكاليف</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- سعر السيارة -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">سعر السيارة</label>
+                                    <div class="flex">
+                                        <input type="number" id="carPrice" class="w-full rounded-r-none border-r-0 border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="أدخل السعر">
+                                        <select id="carPriceCurrency" class="rounded-l-none border-l-0 border-gray-300 bg-gray-100 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="usd">دولار</option>
+                                            <option value="dzd">دينار</option>
+                                        </select>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">سعر شراء السيارة قبل الشحن والجمارك</p>
+                                </div>
+                                
+                                <!-- سعر الشحن -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">سعر الشحن</label>
+                                    <div class="flex">
+                                        <input type="number" id="shippingPrice" class="w-full rounded-r-none border-r-0 border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="أدخل سعر الشحن">
+                                        <select id="shippingCurrency" class="rounded-l-none border-l-0 border-gray-300 bg-gray-100 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="usd">دولار</option>
+                                            <option value="dzd">دينار</option>
+                                        </select>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">تكلفة شحن السيارة من الصين إلى الجزائر</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- قسم سعر الصرف -->
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-green-800 mb-3">💱 سعر الصرف</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- سعر الصرف الموازي -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">سعر الصرف الموازي (دينار)</label>
+                                    <input type="number" id="blackMarketRate" class="w-full border-gray-300 rounded focus:ring-green-500 focus:border-green-500" placeholder="أدخل سعر الصرف الموازي">
+                                    <p class="text-xs text-gray-500 mt-1">سعر صرف الدولار في السوق الموازية</p>
+                                </div>
+                                
+                                <!-- سعر الصرف الرسمي -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">سعر الصرف الرسمي (دينار)</label>
+                                    <div class="flex">
+                                        <input type="number" id="officialRate" class="w-full rounded-r-none border-gray-300 focus:ring-green-500 focus:border-green-500" placeholder="أدخل سعر الصرف الرسمي">
+                                        <button type="button" id="getOfficialRate" class="bg-green-600 text-white px-3 py-2 rounded-l hover:bg-green-700 transition">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">سعر صرف الدولار الرسمي المعتمد من البنك المركزي</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- قسم خصائص السيارة -->
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-3">🚗 خصائص السيارة</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- نوع السيارة -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">نوع السيارة</label>
+                                    <select id="carType" class="w-full border-gray-300 rounded focus:ring-purple-500 focus:border-purple-500">
+                                        <option value="tourism">سياحية</option>
+                                        <option value="utility">نفعية</option>
+                                    </select>
+                                    <p class="text-xs text-gray-500 mt-1">نوع السيارة يؤثر على نسبة الجمارك</p>
+                                </div>
+                                
+                                <!-- نوع المحرك -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">نوع المحرك</label>
+                                    <select id="engineType" class="w-full border-gray-300 rounded focus:ring-purple-500 focus:border-purple-500">
+                                        <option value="electric">كهربائي</option>
+                                        <option value="gasoline">بنزين</option>
+                                        <option value="hybrid">هجين</option>
+                                    </select>
+                                    <p class="text-xs text-gray-500 mt-1">نوع المحرك يؤثر على نسبة الجمارك</p>
+                                </div>
+                                
+                                <!-- سعة المحرك -->
+                                <div id="engineCapacityContainer">
+                                    <label class="block text-gray-700 mb-1">سعة المحرك (لتر)</label>
+                                    <input type="number" id="engineCapacity" step="0.1" min="0.1" class="w-full border-gray-300 rounded focus:ring-purple-500 focus:border-purple-500" placeholder="أدخل سعة المحرك باللتر">
+                                    <p class="text-xs text-gray-500 mt-1">سعة المحرك تؤثر على نسبة الجمارك</p>
+                                </div>
+                                
+                                <!-- عداد السيارة -->
+                                <div>
+                                    <label class="block text-gray-700 mb-1">عداد السيارة (كم)</label>
+                                    <input type="number" id="carMileage" class="w-full border-gray-300 rounded focus:ring-purple-500 focus:border-purple-500" placeholder="أدخل عدد الكيلومترات">
+                                    <p class="text-xs text-gray-500 mt-1">السيارة تعتبر جديدة إذا كان العداد أقل من 6000 كم</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="calculateBtn" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-md">
+                            <i class="fas fa-calculator mr-2"></i> حساب التكلفة الإجمالية
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- النتائج -->
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-file-invoice-dollar text-green-600 mr-2"></i> نتائج الحساب
+                    </h2>
+                    
+                    <div id="resultsContainer" class="hidden space-y-6">
+                        <!-- فاتورة الشراء -->
+                        <div class="bg-white border border-blue-200 rounded-lg shadow-sm p-4">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-3 border-b pb-2">📄 فاتورة الشراء</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>سعر السيارة:</span>
+                                    <span id="resultCarPrice" class="font-semibold">0 دولار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>سعر الشحن:</span>
+                                    <span id="resultShippingPrice" class="font-semibold">0 دولار</span>
+                                </div>
+                                <div class="flex justify-between border-t pt-2 mt-2">
+                                    <span class="font-bold">الإجمالي:</span>
+                                    <span id="resultTotalUSD" class="font-bold text-blue-600">0 دولار</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- فاتورة الجمركة -->
+                        <div class="bg-white border border-green-200 rounded-lg shadow-sm p-4">
+                            <h3 class="text-lg font-semibold text-green-800 mb-3 border-b pb-2">🏛️ فاتورة الجمركة</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>نسبة الجمركة:</span>
+                                    <span id="resultCustomsPercentage" class="font-semibold">0%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>قيمة الجمركة:</span>
+                                    <span id="resultCustomsValue" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>القيمة المضافة (TVA):</span>
+                                    <span id="resultTVA" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between border-t pt-2 mt-2">
+                                    <span class="font-bold">إجمالي الجمركة:</span>
+                                    <span id="resultTotalCustoms" class="font-bold text-green-600">0 دينار</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الفاتورة النهائية -->
+                        <div class="bg-white border border-purple-200 rounded-lg shadow-sm p-4">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-3 border-b pb-2">📊 الفاتورة النهائية</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>سعر السيارة:</span>
+                                    <span id="resultFinalCarPrice" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>سعر الشحن:</span>
+                                    <span id="resultFinalShippingPrice" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>قيمة الجمركة:</span>
+                                    <span id="resultFinalCustomsValue" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>القيمة المضافة (TVA):</span>
+                                    <span id="resultFinalTVA" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>أعباء أخرى:</span>
+                                    <span id="resultOtherFees" class="font-semibold">0 دينار</span>
+                                </div>
+                                <div class="flex justify-between border-t pt-2 mt-2 text-lg">
+                                    <span class="font-bold">التكلفة الإجمالية:</span>
+                                    <span id="resultFinalTotal" class="font-bold text-purple-600">0 دينار</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- رسالة البداية -->
+                    <div id="startMessage" class="bg-gray-100 rounded-lg p-8 text-center">
+                        <i class="fas fa-calculator text-5xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">أدخل بيانات السيارة</h3>
+                        <p class="text-gray-600">قم بإدخال جميع البيانات المطلوبة ثم اضغط على زر الحساب للحصول على التكلفة الإجمالية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="text-center text-gray-600 mt-8">
+            <p>© 2025 حاسبة تكلفة استيراد السيارات - الجزائر</p>
+        </footer>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
