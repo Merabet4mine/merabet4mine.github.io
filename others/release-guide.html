@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Express Android Release • Interactive Playbook</title>
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --panel:#121217;
+      --muted:#a1a1aa;
+      --text:#e5e7eb;
+      --border:#26262f;
+      --accent:#6366f1;
+      --chip:#1b1b22;
+      --code:#0a0a0c;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 8px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(99,102,241,.08), transparent 45%),
+                  radial-gradient(1000px 600px at 110% -20%, rgba(99,102,241,.06), transparent 48%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    .container{max-width:960px;margin:0 auto;padding:40px 24px}
+    h1{font-size:28px;margin:0 0 6px 0}
+    h2{font-size:20px;margin:0 0 12px 0}
+    h3{font-size:14px;margin:0 0 10px 0;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    p,li{color:#d0d2d7}
+    a{color:#a5b4fc;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)), var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .header-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;
+      background:var(--chip);border:1px solid var(--border);
+      color:var(--text);border-radius:8px;padding:6px 10px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    }
+    .chip span{opacity:.7}
+    .grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    .field input{
+      width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--border);
+      background:#0f0f14;color:var(--text);font-size:14px;outline:none;
+    }
+    .derived{margin-top:8px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:auto}
+    section{margin-top:26px}
+    .card{border:1px solid var(--border);border-radius:var(--radius);background:#0f0f14;padding:14px}
+    .row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+    .row:last-child{border-bottom:none}
+    .row input[type=checkbox]{margin-top:2px;width:18px;height:18px;border-radius:6px}
+    .row .content{flex:1;font-size:14px}
+    .code{
+      position:relative;background:var(--code);border:1px solid var(--border);
+      border-radius:12px;padding:12px;margin-top:8px;overflow:auto;color:#e6edf3;
+      font-size:12px;
+    }
+    .code code{white-space:pre}
+    .copy{
+      position:absolute;right:8px;top:8px;border:1px solid var(--border);background:#151518;
+      color:var(--text);padding:4px 8px;border-radius:8px;font-size:11px;cursor:pointer
+    }
+    .copy:active{transform:scale(.98)}
+    .footer{margin-top:40px;text-align:center;color:var(--muted);font-size:12px}
+    .muted{color:var(--muted)}
+    .code-note {
+      background: var(--chip);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Express Android Release • Interactive Playbook</h1>
+      <p>A systematic approach for releasing new versions of the Android Express library, including regression testing and SuperApp integration. Estimated total time ~4–6 hours (excluding QA).</p>
+      <p>Before starting, replace these `properties` throughout your process based on this <a target="_blank" href="https://www.notion.so/ysir/12ff03bdfe1b80228987fb73ab042991?v=12ff03bdfe1b80e18fab000cf212ac13">#document</a></p>
+    </header>
+
+    <div class="panel" id="control-panel">
+      <h3>Control Panel</h3>
+      <div class="grid">
+        <div class="field"><label>Cycle</label><input id="inp-cycle" type="number" step="1"></div>
+        <div class="field"><label>Sprint</label><input id="inp-sprint" type="number" step="0.01"></div>
+        <div class="field"><label>SuperApp</label><input id="inp-super" type="number" step="0.01"></div>
+        <div class="field"><label>Express</label><input id="inp-express" type="number" step="0.01"></div>
+        <div class="field"><label>App Code</label><input id="inp-code" type="number" step="1"></div>
+      </div>
+      <div class="derived" id="derived-preview"></div>
+    </div>
+
+    <div class="header-chips" id="chips"></div>
+
+    <section>
+      <h2>Phase 1: Pre‑Release Preparation</h2>
+      <div class="card" id="phase1"></div>
+    </section>
+
+    <section>
+      <h2>Phase 2: Express Library Release</h2>
+      <div class="card" id="phase2"></div>
+    </section>
+
+    <section>
+      <h2>Phase 3: SuperApp Integration</h2>
+      <div class="card" id="phase3"></div>
+    </section>
+
+    <section>
+      <h2>Phase 5: Back‑merge to Development</h2>
+      <div class="card" id="phase5"></div>
+    </section>
+
+    <section>
+      <h2>Phase 6: Create a New Release Branch</h2>
+      <div class="card" id="phase6"></div>
+    </section>
+
+    <section>
+      <h2>Phase 7: Build & QA Distribution</h2>
+      <div class="card" id="phase7"></div>
+    </section>
+
+    <div class="footer">Process completed successfully ✅ — stay consistent & keep docs updated.</div>
+  </div>
+
+  <script>
+  (function(){
+    const STORAGE_KEY = "express-release-playbook";
+
+    const qs = (sel, el=document) => el.querySelector(sel);
+    const qsa = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+
+    // --- State ---
+    const state = {
+      cycle: 55,
+      sprint: 25.14,
+      superAppVersion: 3.37,
+      expressVersion: 5.27,
+      expressCode: 349,
+      checks: {}
+    };
+
+    // Load persisted
+    try{
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if(saved && typeof saved === "object"){
+        Object.assign(state, saved);
+      }
+    }catch(e){/* ignore */}
+
+    // --- Elements ---
+    const inpCycle = qs("#inp-cycle");
+    const inpSprint = qs("#inp-sprint");
+    const inpSuper  = qs("#inp-super");
+    const inpExpr   = qs("#inp-express");
+    const inpCode   = qs("#inp-code");
+    const chips     = qs("#chips");
+    const derivedPreview = qs("#derived-preview");
+
+    // Init inputs
+    inpCycle.value = state.cycle;
+    inpSprint.value = state.sprint;
+    inpSuper.value  = state.superAppVersion;
+    inpExpr.value   = state.expressVersion;
+    inpCode.value   = state.expressCode;
+
+    // Persist helper
+    function persist(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // Math helpers
+    const f2 = (n)=> Number(n).toFixed(2);
+    const add = (n, step) => Math.round((Number(n) + Number(step)) * 100) / 100;
+
+    // Derived recompute
+    function derive(){
+      const cycle = Number(state.cycle);
+      const sprint = Number(state.sprint);
+      const superAppVersion = Number(state.superAppVersion);
+      const expressVersion = Number(state.expressVersion);
+      const expressCode = Number(state.expressCode);
+
+      const expressV_0_0 = `${expressVersion}.0.0`;
+      const expressV_0_1 = `${expressVersion}.0.1`;
+      const expressV_plus01 = f2(add(expressVersion, 0.01));
+      const expressV_plus01_0_0_alpha1 = `${expressV_plus01}.0.0-alpha1`;
+      const expressV_plus02 = f2(add(expressVersion, 0.02));
+
+      const superV_0 = `${superAppVersion}.0`;
+      const superV_plus01 = f2(add(superAppVersion, 0.01));
+      const superV_plus01_0 = `${superV_plus01}.0`;
+
+      const mergeBranchName = `merge-release-${expressVersion}.0-into-main`;
+      const releaseSrcBranch = `release/release_${expressVersion}.0`;
+      const releaseTag = `release-${expressVersion}.0`;
+      const releaseBranchToDelete = `release/release-${expressVersion}.0`;
+
+      const superReleaseBranch = `release/${superV_0}`;
+      const superExpressCycleBranch = `release_express_cycle_${cycle}_v${expressVersion}.0`;
+      const backmergeNewVersion = `v${expressV_plus02}.0`;
+
+      const newReleaseBranch = `release/release_${expressV_plus01}.0`;
+      const appVersionCodeNext = Number(expressCode) + 1;
+      const appVersionNameNext = `${expressV_plus01}.0`;
+
+      const nextCycle = Number(cycle) + 1;
+      const nextCycleBranch = `release_express_cycle_${nextCycle}_v${expressV_plus01}.0`;
+      const nextSuperRelease = `Release/${superV_plus01_0}`;
+      const versionNameExpress = `${superV_plus01_0}-Express`;
+      const preprodLabel = `${superV_plus01_0}-Express-preprod`;
+
+      return {
+        cycle, sprint, superAppVersion, expressVersion, expressCode,
+        expressV_0_0, expressV_0_1, expressV_plus01, expressV_plus01_0_0_alpha1, expressV_plus02,
+        superV_0, superV_plus01, superV_plus01_0,
+        mergeBranchName, releaseSrcBranch, releaseTag, releaseBranchToDelete,
+        superReleaseBranch, superExpressCycleBranch, backmergeNewVersion,
+        newReleaseBranch, appVersionCodeNext, appVersionNameNext,
+        nextCycle, nextCycleBranch, nextSuperRelease, versionNameExpress, preprodLabel
+      };
+    }
+
+    function renderChips(d){
+      chips.innerHTML = [
+        chip("Cycle", d.cycle),
+        chip("Sprint", d.sprint),
+        chip("SuperApp", d.superAppVersion),
+        chip("Express", d.expressVersion),
+        chip("AppCode", d.expressCode)
+      ].join("");
+    }
+    function chip(label, value){
+      return `<span class="chip"><span>${label}:</span> <strong>${value}</strong></span>`;
+    }
+
+    function updateDerivedPreview(d){
+      derivedPreview.textContent = `Examples: merge-release-${d.expressVersion}.0-into-main · ${d.releaseSrcBranch} · ${d.expressV_0_1}`;
+    }
+
+    // ---- Checklist builder ----
+    function mkRow(id, html, codeBlock){
+      const checked = !!state.checks[id];
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <input type="checkbox" data-id="${id}" ${checked? "checked": ""} />
+        <div class="content">${html}</div>
+      `;
+      if(codeBlock){
+        const pre = document.createElement("div");
+        pre.className = "code";
+        const btn = document.createElement("button");
+        btn.className = "copy";
+        btn.textContent = "Copy";
+        btn.addEventListener("click", ()=>{
+          navigator.clipboard.writeText(codeBlock());
+          btn.textContent = "Copied";
+          setTimeout(()=> btn.textContent = "Copy", 1200);
+        });
+        const code = document.createElement("code");
+        code.textContent = codeBlock();
+        pre.appendChild(btn);
+        pre.appendChild(code);
+        row.querySelector(".content").appendChild(pre);
+      }
+      const cb = row.querySelector("input[type=checkbox]");
+      cb.addEventListener("change", (e)=>{
+        state.checks[id] = e.target.checked;
+        persist();
+      });
+      return row;
+    }
+
+    // Build phases
+    function buildPhases(d){
+      // Phase 1
+      const p1 = qs("#phase1"); p1.innerHTML = "";
+      p1.appendChild(mkRow("p1-1", `Announce code freeze in <a target="_blank" href="https://yassir-team.slack.com/archives/C05RK73H8AD">#android_css_and_fse_team</a>.`, ()=>(
+`@channel 📢 CODE FREEZE NOTICE CYCLE
+Express library release starting in 2 hours.
+Please merge all pending PRs and complete code reviews before then.
+Any unmerged PRs will move to the next cycle.
+Thank you for your cooperation! 🙏`
+      )));
+      p1.appendChild(mkRow("p1-2", "Verify all critical PRs are merged into the <code class='code-note'>release</code> branch."));
+      p1.appendChild(mkRow("p1-3", "Confirm no blocking issues in JIRA."));
+
+      // Phase 2
+      const p2 = qs("#phase2"); p2.innerHTML = "";
+      p2.appendChild(mkRow("p2-1", `Create branch <code class='code-note'>${d.mergeBranchName}</code> from <code class='code-note'>main</code>.`));
+      p2.appendChild(mkRow("p2-2", `Merge all changes from <code class='code-note'>${d.releaseSrcBranch}</code> and resolve conflicts.`));
+      p2.appendChild(mkRow("p2-3", "Update all libraries to match SuperApp and test locally."));
+      p2.appendChild(mkRow("p2-4", "Update changelog; ensure structure and completeness."));
+      p2.appendChild(mkRow("p2-5", `Update version in <code class='code-note'>gradle.properties</code>.`, ()=> `LIBRARY_VERSION=${d.expressV_0_0}`));
+      p2.appendChild(mkRow("p2-6", "Push and create a PR to <code class='code-note'>main</code>."));
+      p2.appendChild(mkRow("p2-7", `Request code review in <a target="_blank" href="https://yassir-team.slack.com/archives/C05RK73H8AD">#android_css_and_fse_team</a>.`, ()=>(
+`@channel 📢 PR REVIEW NEEDED
+Release merge PR: [PR Link]
+This is critical for Express release. Please review ASAP.
+Thanks! 🚀`
+      )));
+      p2.appendChild(mkRow("p2-8", `Merge the PR (regular merge, <b>not</b> squash).`));
+      p2.appendChild(mkRow("p2-9", `Verify version <code class='code-note'>${d.expressV_0_1}</code> is released (<a target="_blank" href="https://app.bitrise.io/app/2252b093-8597-46bb-b443-6696a9276bb3">#Bitrise</a> & <a target="_blank" href="https://github.com/YAtechnologies/yassir-express-client-revamp/releases">#GitHub Releases</a>).`));
+      p2.appendChild(mkRow("p2-10", `Create release tag <code class='code-note'>${d.releaseTag}</code>.`));
+      p2.appendChild(mkRow("p2-11", `Delete branch <code class='code-note'>${d.releaseBranchToDelete}</code> from the repo.`));
+
+      // Phase 3
+      const p3 = qs("#phase3"); p3.innerHTML = "";
+      p3.appendChild(mkRow("p3-1", `Merge <code class='code-note'>release/${d.superAppVersion}.0</code> into <code class='code-note'>${d.superExpressCycleBranch}</code>.`));
+      p3.appendChild(mkRow("p3-2", `Update <code class='code-note'>yassirExpressVersion</code> in <code class='code-note'>libs.versions</code> to <code class='code-note'>${d.expressV_0_1}</code> and test.`));
+      p3.appendChild(mkRow("p3-3", `Update <code class='code-note'>## Updated Dependencies</code> in <code class='code-note'>CHANGELOG.md</code>.`, ()=> `- YassirExpress                   : ['${d.expressV_0_1}'],`));
+      p3.appendChild(mkRow("p3-4", `Create a PR to <code class='code-note'>${d.superReleaseBranch}</code> (follow existing PR example).`));
+
+      // Phase 5
+      const p5 = qs("#phase5"); p5.innerHTML = "";
+      p5.appendChild(mkRow("p5-1", `Create branch <code class='code-note'>merge-main-into-dev</code> from <code class='code-note'>development</code>.`));
+      p5.appendChild(mkRow("p5-2", `Merge all changes from <code class='code-note'>main</code> and resolve conflicts.`));
+      p5.appendChild(mkRow("p5-3", `Add new changelog section.`, ()=>(
+`# Release ${d.backmergeNewVersion}
+
+## Added
+
+## Fixed
+
+## Technical Changes
+
+## Added Dependencies
+
+## Updated Dependencies`
+      )));
+      p5.appendChild(mkRow("p5-4", `Check third‑party modules are up‑to‑date and compatible.`));
+      p5.appendChild(mkRow("p5-5", `Push and create a PR to <code class='code-note'>development</code>.`));
+      p5.appendChild(mkRow("p5-6", `Request code review in <a target="_blank" href="https://yassir-team.slack.com/archives/C05RK73H8AD">#android_css_and_fse_team</a>.`, ()=>(
+`@channel 📢 PR REVIEW NEEDED
+Back-merge PR: [PR Link]
+Please review ASAP.
+Thanks! 😌`
+      )));
+      p5.appendChild(mkRow("p5-7", `Merge the PR (regular merge, not squash).`));
+
+      // Phase 6
+      const p6 = qs("#phase6"); p6.innerHTML = "";
+      p6.appendChild(mkRow("p6-1", `Create branch <code class='code-note'>${d.newReleaseBranch}</code> from <code class='code-note'>development</code>.`));
+      p6.appendChild(mkRow("p6-2", `Update <code class='code-note'>gradle.properties</code>.`, ()=>(
+`LIBRARY_VERSION=${d.expressV_plus01}.0.0-alpha1
+APP_VERSION_CODE=${d.appVersionCodeNext}
+APP_VERSION_NAME=${d.appVersionNameNext}`
+      )));
+      p6.appendChild(mkRow("p6-3", `Generate local library.`, ()=> `./gradlew publish`));
+      p6.appendChild(mkRow("p6-4", `Publish the new branch.`));
+      p6.appendChild(mkRow("p6-5", `In SuperApp, create branch <code class='code-note'>${d.nextCycleBranch}</code> from <code class='code-note'>${d.nextSuperRelease}</code>.`));
+      p6.appendChild(mkRow("p6-6", `Update <code class='code-note'>libs.versions</code>.`, ()=>(
+`versionName="${d.versionNameExpress}"
+yassirExpressVersion="${d.expressV_plus01}.0.0-alpha1"`
+      )));
+      p6.appendChild(mkRow("p6-7", `Publish the new branch.`));
+
+      // Phase 7
+      const p7 = qs("#phase7"); p7.innerHTML = "";
+      p7.appendChild(mkRow("p7-1", `On Bitrise (Yassir-One), select branch <code class='code-note'>${d.nextCycleBranch}</code> and run <code class='code-note'>preproductionReleaseGradle8</code>.`));
+      p7.appendChild(mkRow("p7-2", `Wait for workflow to finish (~30–45 min).`));
+      p7.appendChild(mkRow("p7-3", `On Firebase App Distribution, open label <code class='code-note'>${d.preprodLabel}</code>.`));
+      p7.appendChild(mkRow("p7-4", `Remove “Mobility Internal Testers”; add “Express Regression QA Team”; include release notes and distribute.`));
+      p7.appendChild(mkRow("p7-5", `Post in <a target="_blank" href="https://yassir-team.slack.com/archives/C05RYJG2WKG">#lmd-express-mobile-release</a> with variables replaced.`, ()=>(
+`@channel 📦 EXPRESS REGRESSION BUILD READY
+
+🔧 SuperApp Build : ${d.preprodLabel} - Cycle ${d.nextCycle}
+📚 Express Version : ${d.expressV_plus01}.0.0-alpha1
+
+📲 Available on :
+- Firebase Pre-prod: LINK
+- Bitrise: LINK
+
+🆕 What's New :
+
+- [FSE-3324] Apply new offers texts on restaurant page when target amount is 0  
+- [FSE-3132] Multiple video banner on FHS.  
+- ....
+- ....
+
+✅ Ready for QA regression testing
+CC: @Maram Zahran @Ahmed Adel Ismail @Haider @Salman`
+      )));
+      p7.appendChild(mkRow("p7-6", `Update tracking documents (cycle status and branch info).`));
+    }
+
+    function refresh(){
+      const d = derive();
+      renderChips(d);
+      updateDerivedPreview(d);
+      buildPhases(d);
+      persist();
+    }
+
+    // Input bindings
+    function bindNumberInput(el, key){
+      el.addEventListener("input", ()=>{
+        const v = el.value;
+        if(v === "" || isNaN(Number(v))) return;
+        state[key] = Number(v);
+        refresh();
+      });
+      // blur to normalize decimals
+      el.addEventListener("blur", ()=>{
+        el.value = state[key];
+      });
+    }
+    bindNumberInput(inpCycle, "cycle");
+    bindNumberInput(inpSprint, "sprint");
+    bindNumberInput(inpSuper,  "superAppVersion");
+    bindNumberInput(inpExpr,   "expressVersion");
+    bindNumberInput(inpCode,   "expressCode");
+
+    // Initial render
+    refresh();
+
+  })();
+  </script>
+</body>
+</html>
