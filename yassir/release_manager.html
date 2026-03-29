@@ -280,7 +280,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-11" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code> to publish Express library version <code class="inline-code var-express-lib">6.6.0.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
                     </div>
                 </label>
 
@@ -321,7 +321,14 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> by appending <code class="inline-code">-express01</code> (e.g., <code class="inline-code">4.6.0.XX-express01</code>) and publish.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.0-express</code>.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph2-4b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
                     </div>
                 </label>
 
@@ -342,7 +349,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-7" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code">-express01</code> version, test locally, and push.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.0-express</code> version, test locally, and push.</p>
                     </div>
                 </label>
 
@@ -509,7 +516,14 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Increment VC version to stable (remove <code class="inline-code">-express01</code>) and publish.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Increment VC version to stable <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.0</code>.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph4-4b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
                     </div>
                 </label>
 
