@@ -280,7 +280,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-11" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Locally change Express variant to <code class="inline-code var-express-alpha">6.6.0.0-alpha01</code> and run <code class="inline-code">./gradlew publish</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code> to publish Express library version <code class="inline-code var-express-lib">6.6.0.0</code>.</p>
                     </div>
                 </label>
 
@@ -314,7 +314,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-3" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update Express version in <code class="inline-code">libs.versions</code> to <code class="inline-code var-express-alpha">6.6.0.0-alpha01</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update Express version in <code class="inline-code">libs.versions</code> to <code class="inline-code var-express-lib">6.6.0.0</code>.</p>
                     </div>
                 </label>
 
@@ -427,7 +427,7 @@ Automation APK is attached.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph3-3" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><span class="font-bold text-red-500">CRITICAL:</span> Ensure <code class="inline-code">LIBRARY_VERSION</code> in <code class="inline-code">gradle.properties</code> is <code class="inline-code var-express-lib">6.6.0.0</code> (remove <code class="inline-code">-alpha01</code>).</p>
+                        <p class="task-text text-slate-700 leading-relaxed"><span class="font-bold text-red-500">CRITICAL:</span> Ensure <code class="inline-code">LIBRARY_VERSION</code> in <code class="inline-code">gradle.properties</code> is <code class="inline-code var-express-lib">6.6.0.0</code>.</p>
                     </div>
                 </label>
 
@@ -655,7 +655,6 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
 
             const expressFull = express + '.0';
             const expressLib = expressFull + '.0';
-            const expressAlpha = expressLib + '-alpha01';
             const releaseBranch = 'release/release_' + expressFull;
             const mergeMainBranch = 'merge-release-' + expressFull + '-into-main';
             const vcBranch = 'release_express_cycle_' + cycle + '_v' + expressFull;
@@ -670,7 +669,6 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             document.querySelectorAll('.var-express-full').forEach(el => el.textContent = expressFull);
             document.querySelectorAll('.var-v-express-full').forEach(el => el.textContent = 'v' + expressFull);
             document.querySelectorAll('.var-express-lib').forEach(el => el.textContent = expressLib);
-            document.querySelectorAll('.var-express-alpha').forEach(el => el.textContent = expressAlpha);
             document.querySelectorAll('.var-express-code').forEach(el => el.textContent = code);
             document.querySelectorAll('.var-release-branch').forEach(el => el.textContent = releaseBranch);
             document.querySelectorAll('.var-merge-main-branch').forEach(el => el.textContent = mergeMainBranch);
