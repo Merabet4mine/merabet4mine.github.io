@@ -146,12 +146,12 @@
     <main class="max-w-5xl mx-auto px-6 mt-8">
         
         <!-- Settings Panel -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-8">
             <div class="flex items-center gap-2 mb-4">
-                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Release Parameters</h2>
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Release Parameters</h2>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Cycle</label>
                     <input type="number" id="inp-cycle" value="74" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
@@ -161,20 +161,16 @@
                     <input type="text" id="inp-sprint" value="26.06" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">SuperApp Ver</label>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">SuperApp Version</label>
                     <input type="text" id="inp-super-app" value="4.6" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">Express Ver</label>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Express Version</label>
                     <input type="text" id="inp-express" value="6.6" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Express Code</label>
                     <input type="number" id="inp-code" value="466" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">Next RM ID</label>
-                    <input type="text" id="inp-next-rm" value="U_ID_HERE" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
             </div>
         </div>
@@ -219,7 +215,7 @@ Merge main into dev for <span class="var-v-express-full text-accent">v6.6.0</spa
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Merge the PR (⚠️ <span class="font-bold text-red-500">IMPORTANT:</span> Use regular merge, NOT squash merge ⚠️).</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Merge the PR (<span class="font-bold text-red-500">⚠️ Regular merge, NOT squash merge ⚠️</span>).</p>
                     </div>
                 </label>
 
@@ -236,13 +232,6 @@ I will start the regression process now.</pre>
                         </div>
                     </div>
                 </div>
-
-                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                    <input type="checkbox" id="ph1-6" class="task-checkbox mt-1">
-                    <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Compile a list of JIRA tickets approved and ready for this release.</p>
-                    </div>
-                </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-7" class="task-checkbox mt-1">
@@ -263,7 +252,7 @@ I will start the regression process now.</pre>
                     <div class="flex-1">
                         <p class="task-text text-slate-700 leading-relaxed mb-2">Update <code class="inline-code">gradle.properties</code>:</p>
                         <ul class="list-disc list-inside text-slate-600 ml-4 space-y-1 text-sm font-mono">
-                            <li>LIBRARY_VERSION=<span class="var-express-lib-zero text-accent font-bold">6.6.0.0</span></li>
+                            <li>LIBRARY_VERSION=<span class="var-express-lib-alpha text-accent font-bold">6.6.0.alpha1</span></li>
                             <li>APP_VERSION_NAME=<span class="var-express-full text-accent font-bold">6.6.0</span></li>
                             <li>APP_VERSION_CODE=<span class="var-express-code text-accent font-bold">466</span></li>
                         </ul>
@@ -273,24 +262,31 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-10" class="task-checkbox mt-1">
                     <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph1-11" class="task-checkbox mt-1">
+                    <div class="flex-1">
                         <p class="task-text text-slate-700 leading-relaxed">Push the new release branch to the repository.</p>
                     </div>
                 </label>
 
-            <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                <input type="checkbox" id="ph1-11" class="task-checkbox mt-1">
-                <div class="flex-1">
-                    <p class="task-text text-slate-700 leading-relaxed">Locally change <code class="inline-code">LIBRARY_VERSION</code> to <code class="inline-code var-express-lib-alpha">6.6.0.alpha1</code> and DO NOT push.</p>
-                </div>
-            </label>
+            </div>
+        </div>
 
-            <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                <input type="checkbox" id="ph1-12" class="task-checkbox mt-1">
-                <div class="flex-1">
-                    <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
+        <!-- Alpha Parameters -->
+        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-6">
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Alpha Suffix</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Alpha Version</label>
+                    <input type="text" id="inp-alpha-suffix" value="0-alpha1" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
-            </label>
-
             </div>
         </div>
 
@@ -328,7 +324,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.alpha1-express</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to <code class="inline-code var-superapp-alpha">4.6.0.alpha1-express</code>.</p>
                     </div>
                 </label>
 
@@ -354,6 +350,13 @@ I will start the regression process now.</pre>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph2-5b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Ensure the SuperApp version in <code class="inline-code">gradle.properties</code> is updated to <code class="inline-code var-superapp-full">4.6.0</code>. If not, update it.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-6" class="task-checkbox mt-1">
                     <div class="flex-1">
                         <p class="task-text text-slate-700 leading-relaxed">Create branch <code class="inline-code var-vc-branch">release_express_cycle_74_v6.6.0</code>.</p>
@@ -363,7 +366,7 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-7" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.alpha1-express</code> version, test locally, and push.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code var-superapp-alpha">4.6.0.alpha1-express</code> version, test locally, and push.</p>
                     </div>
                 </label>
 
@@ -417,6 +420,20 @@ Automation APK is attached.</pre>
             </div>
         </div>
 
+        <!-- Beta/RC Suffix -->
+        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-6">
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Beta/RC Suffix (Optional)</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Final Version Suffix</label>
+                    <input type="text" id="inp-final-suffix" value="0" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none" placeholder="e.g. 0, 1, rc1">
+                </div>
+            </div>
+        </div>
+
         <!-- Phase 3 -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
             <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
@@ -450,7 +467,7 @@ Automation APK is attached.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph3-3" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><span class="font-bold text-red-500">CRITICAL:</span> Ensure <code class="inline-code">LIBRARY_VERSION</code> in <code class="inline-code">gradle.properties</code> is <code class="inline-code var-express-lib">6.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update <code class="inline-code">LIBRARY_VERSION</code> in <code class="inline-code">gradle.properties</code> to <code class="inline-code var-express-lib">6.6.0.0</code>.</p>
                     </div>
                 </label>
 
@@ -477,7 +494,7 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph3-6" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Merge the PR (⚠️ <span class="font-bold text-red-500">IMPORTANT:</span> Use regular merge, NOT squash merge ⚠️).</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Merge the PR (<span class="font-bold text-red-500">⚠️ Regular merge, NOT squash merge ⚠️</span>).</p>
                     </div>
                 </label>
 
@@ -532,7 +549,7 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Increment VC version to stable <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to stable <code class="inline-code"><span class="var-superapp-full">4.6.0</span>.0</code>.</p>
                     </div>
                 </label>
 
@@ -571,6 +588,20 @@ This is critical for the final Express release. Please review ASAP.</pre>
                     </div>
                 </label>
 
+            </div>
+        </div>
+
+        <!-- Handoff Parameters -->
+        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-6">
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Handoff Parameters</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Next Release Manager ID</label>
+                    <input type="text" id="inp-next-rm" value="U_ID_HERE" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
+                </div>
             </div>
         </div>
 
@@ -682,6 +713,8 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             superApp: document.getElementById('inp-super-app'),
             express: document.getElementById('inp-express'),
             code: document.getElementById('inp-code'),
+            alphaSuffix: document.getElementById('inp-alpha-suffix'),
+            finalSuffix: document.getElementById('inp-final-suffix'),
             nextRm: document.getElementById('inp-next-rm')
         };
 
@@ -690,12 +723,15 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             const express = inputs.express.value || '6.6';
             const superApp = inputs.superApp.value || '4.6';
             const code = inputs.code.value || '466';
+            const alphaSuffix = inputs.alphaSuffix.value || '0-alpha1';
+            const finalSuffix = inputs.finalSuffix?.value || '0';
             const nextRm = inputs.nextRm.value || 'U_ID_HERE';
 
             const expressFull = express + '.0';
-            const expressLib = expressFull + '.0';
-            const expressLibAlpha = expressFull + '.alpha1';
+            const expressLib = expressFull + '.' + finalSuffix;
             const expressLibZero = expressFull + '.0';
+            const expressAlpha = expressFull + '.' + alphaSuffix;
+            const superappAlpha = superApp + '.0.' + alphaSuffix + '-express';
             const releaseBranch = 'release/release_' + expressFull;
             const mergeMainBranch = 'merge-release-' + expressFull + '-into-main';
             const vcBranch = 'release_express_cycle_' + cycle + '_v' + expressFull;
@@ -710,7 +746,8 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             document.querySelectorAll('.var-express-full').forEach(el => el.textContent = expressFull);
             document.querySelectorAll('.var-v-express-full').forEach(el => el.textContent = 'v' + expressFull);
             document.querySelectorAll('.var-express-lib').forEach(el => el.textContent = expressLib);
-            document.querySelectorAll('.var-express-lib-alpha').forEach(el => el.textContent = expressLibAlpha);
+            document.querySelectorAll('.var-express-lib-alpha').forEach(el => el.textContent = expressAlpha);
+            document.querySelectorAll('.var-superapp-alpha').forEach(el => el.textContent = superappAlpha);
             document.querySelectorAll('.var-express-lib-zero').forEach(el => el.textContent = expressLibZero);
             document.querySelectorAll('.var-express-code').forEach(el => el.textContent = code);
             document.querySelectorAll('.var-release-branch').forEach(el => el.textContent = releaseBranch);
