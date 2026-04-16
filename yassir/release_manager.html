@@ -108,6 +108,26 @@
             font-size: 0.875em;
             font-weight: 500;
         }
+
+        /* Collapsible Sections */
+        .phase-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .phase-section.is-collapsed .phase-content {
+            max-height: 0;
+            opacity: 0;
+        }
+        .phase-section:not(.is-collapsed) .phase-content {
+            max-height: 5000px; /* Arbitrary large number */
+            opacity: 1;
+        }
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+        .phase-section.is-collapsed .chevron {
+            transform: rotate(-90deg);
+        }
     </style>
 </head>
 <body class="text-slate-800 pb-20">
@@ -145,6 +165,16 @@
 
     <main class="max-w-5xl mx-auto px-6 mt-8">
         
+        <!-- Quick Links Footer -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-slate-600 mb-12">
+            <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🌿 Express Branches</a>
+            <a href="https://www.notion.so/5714e46a14fb452395fa662c5b6bda3c" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">📊 SuperApp Releases</a>
+            <a href="https://app.bitrise.io/app/2252b093-8597-46bb-b443-6696a9276bb3" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔨 Bitrise Express</a>
+            <a href="https://app.bitrise.io/app/48a65bcd7293de7a" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔨 Bitrise SuperApp</a>
+            <a href="https://github.com/YAtechnologies/yassir-express-client-revamp/releases" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🐙 GitHub Releases</a>
+            <a href="https://console.firebase.google.com/project/ysr-superapp-fb-qa/appdistribution/app/android:com.yatechnologies.yassir_rider.preprod/releases" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔥 Firebase Console</a>
+        </div>
+
         <!-- Settings Panel -->
         <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-8">
             <div class="flex items-center gap-2 mb-4">
@@ -176,26 +206,72 @@
         </div>
 
         <!-- Phase 1 -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 phase-section" id="phase-1">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
                 <h3 class="font-bold text-slate-800 flex items-center gap-2">
                     <span class="text-xl">🚦</span> Phase 1: Pre-Release & Alpha Build
                 </h3>
-                <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Sunday • ~1 hr</span>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Sunday • ~1 hr</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
-            <div class="divide-y divide-slate-100">
+            <div class="phase-content">
+                <div class="divide-y divide-slate-100">
                 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/yassir-express-client-revamp" target="_blank" class="hover:underline">Express Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-1" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">Express repository</code>, create branch <code class="inline-code">merge-main-into-dev</code> from <code class="inline-code">development</code>, pull <code class="inline-code">main</code> into it, and resolve conflicts.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Create branch <code class="inline-code">merge-main-into-dev</code> from <code class="inline-code">development</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph1-1a" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Pull <code class="inline-code">main</code> into it, and resolve conflicts.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph1-1b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Review and format the changelog section for <code class="inline-code var-v-express-full">v6.6.0</code>.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph5-6" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Create new milestone <code class="inline-code var-v-next-version">v6.7.0</code> on GitHub.</p>
+                    </div>
+                </label>
+
+                <div class="task-item flex items-start gap-4 p-5">
+                    <input type="checkbox" id="ph1-1c" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <label for="ph1-1c" class="task-text text-slate-700 leading-relaxed cursor-pointer block mb-3">Add new changelog section for the next release (<code class="inline-code var-v-next-version">v6.7.0</code>).</label>
+                        <div class="relative group">
+                            <button onclick="copyText('changelog-next', this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">Copy</button>
+                            <pre id="changelog-next" class="bg-slate-900 text-slate-50 p-4 rounded-lg font-mono text-sm overflow-x-auto leading-relaxed"># Release <span class="var-v-next-version text-accent">v6.7.0</span>
+### Added
+### Fixed
+### Technical Changes
+### Added Dependencies
+### Updated Dependencies</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-2" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Review and format the changelog section for <code class="inline-code var-v-express-full">v6.6.0</code>, push, and create a PR to <code class="inline-code">dev</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Push and create a PR to <code class="inline-code">dev</code>.</p>
                     </div>
                 </label>
 
@@ -218,6 +294,37 @@ Merge main into dev for <span class="var-v-express-full text-accent">v6.6.0</spa
                         <p class="task-text text-slate-700 leading-relaxed">Merge the PR (<span class="font-bold text-red-500">⚠️ Regular merge, NOT squash merge ⚠️</span>).</p>
                     </div>
                 </label>
+
+            </div>
+            </div>
+        </div>
+
+        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-6">
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Alpha Suffix</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Alpha Version</label>
+                    <input type="text" id="inp-alpha-suffix" value="0-alpha1" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 phase-section">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                    <span class="text-xl">❄️</span> Phase 2: Code Freeze & Release Branch
+                </h3>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Sunday • ~1 hr</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+            </div>
+            <div class="phase-content">
+            <div class="divide-y divide-slate-100">
 
                 <div class="task-item flex items-start gap-4 p-5">
                     <input type="checkbox" id="ph1-5" class="task-checkbox mt-1">
@@ -260,6 +367,19 @@ I will start the regression process now.</pre>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph1-9b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed mb-2">Run the following commands and ensure they complete successfully:</p>
+                        <ul class="list-disc list-inside text-slate-600 ml-4 space-y-1 text-sm font-mono">
+                            <li><code class="inline-code">./gradlew task</code></li>
+                            <li><code class="inline-code">./gradlew debugCoverage</code></li>
+                            <li><code class="inline-code">./gradlew googleDebugCoverage</code></li>
+                            <li><code class="inline-code">./gradlew jacocoDebugTestReport</code></li>
+                        </ul>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph1-10" class="task-checkbox mt-1">
                     <div class="flex-1">
                         <p class="task-text text-slate-700 leading-relaxed">Run <code class="inline-code">./gradlew publish</code>.</p>
@@ -274,36 +394,31 @@ I will start the regression process now.</pre>
                 </label>
 
             </div>
+            </div>
         </div>
 
-        <!-- Alpha Parameters -->
-        <div class="bg-indigo-50 rounded-xl shadow-sm border border-indigo-100 p-6 mb-6">
-            <div class="flex items-center gap-2 mb-4">
-                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                <h2 class="text-sm font-bold text-indigo-800 uppercase tracking-wider">Alpha Suffix</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">Alpha Version</label>
-                    <input type="text" id="inp-alpha-suffix" value="0-alpha1" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 phase-section">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                    <span class="text-xl">📱</span> Phase 3: SuperApp Alpha Integration & QA
+                </h3>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Sunday • ~1-2 hrs</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
             </div>
-        </div>
-
-        <!-- Phase 2 -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-                <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                    <span class="text-xl">📱</span> Phase 2: SuperApp Alpha Integration & QA
-                </h3>
-                <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Sunday • ~1-2 hrs</span>
-            </div>
+            <div class="phase-content">
             <div class="divide-y divide-slate-100">
                 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/cross-yassir-version-catalog" target="_blank" class="hover:underline">Version Catalog Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-1" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">Version Catalog repository</code>, checkout active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Checkout active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
                     </div>
                 </label>
 
@@ -342,17 +457,21 @@ I will start the regression process now.</pre>
                     </div>
                 </label>
 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/yassir-one-android" target="_blank" class="hover:underline">SuperApp Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-5" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">SuperApp repository</code>, checkout active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Checkout active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-5b" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Ensure the SuperApp version in <code class="inline-code">gradle.properties</code> is updated to <code class="inline-code var-superapp-full">4.6.0</code>. If not, update it.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Ensure the SuperApp version in <code class="inline-code">build.properties (app)</code> is updated to <code class="inline-code var-superapp-full">4.6.0</code>. If not, update it.</p>
                     </div>
                 </label>
 
@@ -366,7 +485,14 @@ I will start the regression process now.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-7" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code var-superapp-alpha">4.6.0.alpha1-express</code> version, test locally, and push.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">settings.gradle.kts</code> to the <code class="inline-code var-superapp-alpha">4.6.0.alpha1-express</code> version.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph2-7b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Verify the build locally, then push the changes.</p>
                     </div>
                 </label>
 
@@ -413,10 +539,11 @@ Automation APK is attached.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph2-11" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update tracking documents: <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="text-accent hover:underline font-medium">Android Express Branches</a> & <a href="https://www.notion.so/238f03bdfe1b8084ba82cad2f0e0d1c9" target="_blank" class="text-accent hover:underline font-medium">Teams Working Schedule</a>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update tracking document: <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="text-accent hover:underline font-medium">Android Express Branches</a>.</p>
                     </div>
                 </label>
 
+            </div>
             </div>
         </div>
 
@@ -434,26 +561,30 @@ Automation APK is attached.</pre>
             </div>
         </div>
 
-        <!-- Phase 3 -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <!-- Phase 4 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 phase-section">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
                 <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                    <span class="text-xl">🚀</span> Phase 3: Stable Library Release
+                    <span class="text-xl">🚀</span> Phase 4: Stable Library Release
                 </h3>
-                <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~1 hr</span>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~1 hr</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
             
-            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 m-5 rounded-r-lg">
-                <p class="text-sm text-amber-800 mb-1"><strong>Note:</strong> Proceed only after QA sign-off on the Regression & E2E testing.</p>
-                <p class="text-sm text-amber-800"><strong>⚠️ IMPORTANT:</strong> Make sure to follow the <a href="https://www.notion.so/37174ca109e24c3a9418b5ef8321054b" target="_blank" class="underline font-semibold">GitFlow & Merge Table</a> before doing a merge.</p>
-            </div>
-
+            <div class="phase-content">
             <div class="divide-y divide-slate-100">
                 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/yassir-express-client-revamp" target="_blank" class="hover:underline">Express Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph3-1" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">Express repository</code>, create branch <code class="inline-code var-merge-main-branch">merge-release-6.6.0-into-main</code> from <code class="inline-code">main</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Create branch <code class="inline-code var-merge-main-branch">merge-release-6.6.0-into-main</code> from <code class="inline-code">main</code>.</p>
                     </div>
                 </label>
 
@@ -513,36 +644,50 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 </label>
 
             </div>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 m-5 rounded-r-lg">
+                <p class="text-sm text-amber-800"><strong>⚠️ Note:</strong> In case the merge fails and the build is not created, you must create the build manually by running <code class="inline-code">./gradlew publish</code> from the <code class="inline-code var-merge-main-branch">merge-release-6.6.0-into-main</code> branch to avoid missing the release deadline. The version number is <code class="inline-code var-express-lib">6.6.0.0</code> and it will be automatically increased after the issue is resolved.</p>
+            </div>
+            </div>
         </div>
 
-        <!-- Phase 4 -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <!-- Phase 5 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 phase-section">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
                 <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                    <span class="text-xl">📱</span> Phase 4: SuperApp Stable Integration
+                    <span class="text-xl">📱</span> Phase 5: SuperApp Stable Integration
                 </h3>
-                <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~1 hr</span>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~1 hr</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
+            <div class="phase-content">
             <div class="divide-y divide-slate-100">
                 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/cross-yassir-version-catalog" target="_blank" class="hover:underline">Version Catalog Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-1" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">Version Catalog repository</code>, switch to <code class="inline-code var-vc-branch">release_express_cycle_74_v6.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Switch to <code class="inline-code var-vc-branch">release_express_cycle_74_v6.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-2" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update the regression branch with the latest active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update the regression branch with the latest active branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-3" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update Express version to stable <code class="inline-code var-express-lib">6.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update Express version to the last shared release <code class="inline-code var-express-lib">6.6.0</code>.</p>
                     </div>
                 </label>
 
@@ -556,7 +701,7 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to the next stable release by incrementing the latest version.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version in <code class="inline-code">build.gradle</code> to the next stable release by incrementing the <a href="https://github.com/YAtechnologies/cross-yassir-version-catalog/packages/2485418/versions" target="_blank" class="text-accent hover:underline font-medium">latest version</a>.</p>
                     </div>
                 </label>
 
@@ -570,28 +715,46 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-4c" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Push the changes and create a PR in the VC repo targeting the active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Push the changes and create a PR in the VC repo targeting the active branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph4-4d" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Add <code class="inline-code">Ready to merge</code> tag and ensure the PR is merged.</p>
+                    </div>
+                </label>
+
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/yassir-one-android" target="_blank" class="hover:underline">SuperApp Repository</a>
+                </div>
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-5" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">SuperApp repository</code>, switch to <code class="inline-code var-vc-branch">release_express_cycle_74_v6.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Switch to <code class="inline-code var-vc-branch">release_express_cycle_74_v6.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-5b" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update the regression branch with the latest active SuperApp branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update the regression branch with the latest active branch <code class="inline-code var-superapp-branch">Release/4.6.0</code>.</p>
                     </div>
                 </label>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-6" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update VC version to the newly published stable version, test locally, and push.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update VC version to the newly published stable version.</p>
+                    </div>
+                </label>
+
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph4-6b" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <p class="task-text text-slate-700 leading-relaxed">Verify the build locally, then push the changes.</p>
                     </div>
                 </label>
 
@@ -605,10 +768,11 @@ This is critical for the final Express release. Please review ASAP.</pre>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph4-8" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Add <code class="inline-code">Ready to merge</code> tags and ensure both PRs are merged.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Add <code class="inline-code">Ready to merge</code> tag and ensure the PR is merged.</p>
                     </div>
                 </label>
 
+            </div>
             </div>
         </div>
 
@@ -621,25 +785,34 @@ This is critical for the final Express release. Please review ASAP.</pre>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1">Next Release Manager ID</label>
-                    <input type="text" id="inp-next-rm" value="U_ID_HERE" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
+                    <input type="text" id="inp-next-rm" value="" placeholder="U_ID_HERE" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-accent focus:border-accent block px-3 py-2 transition-all outline-none">
                 </div>
             </div>
         </div>
 
-        <!-- Phase 5 -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+        <!-- Phase 6 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8 phase-section">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center cursor-pointer select-none phase-header" onclick="togglePhase(this)">
                 <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                    <span class="text-xl">🔄</span> Phase 5: Back-merge & Handoff
+                    <span class="text-xl">🔄</span> Phase 6: Back-merge & Handoff
                 </h3>
-                <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~30 mins</span>
+                <div class="flex items-center gap-3">
+                    <span class="phase-progress text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">0/0</span>
+                    <span class="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">Wednesday • ~30 mins</span>
+                    <svg class="w-5 h-5 text-slate-400 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
+            <div class="phase-content">
             <div class="divide-y divide-slate-100">
                 
+                <div class="bg-orange-50/50 px-6 py-2.5 text-sm font-bold text-orange-900 border-y border-orange-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <a href="https://github.com/YAtechnologies/yassir-express-client-revamp" target="_blank" class="hover:underline">Express Repository</a>
+                </div>
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph5-1" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><code class="inline-code">Express repository</code>, create branch <code class="inline-code">merge-main-into-dev</code> from <code class="inline-code">development</code>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Create branch <code class="inline-code">merge-main-into-dev</code> from <code class="inline-code">development</code>.</p>
                     </div>
                 </label>
 
@@ -650,42 +823,33 @@ This is critical for the final Express release. Please review ASAP.</pre>
                     </div>
                 </label>
 
-                <div class="task-item flex items-start gap-4 p-5">
-                    <input type="checkbox" id="ph5-3" class="task-checkbox mt-1">
+                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
+                    <input type="checkbox" id="ph5-4" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <label for="ph5-3" class="task-text text-slate-700 leading-relaxed cursor-pointer block mb-3">Add new changelog section for the next release (<code class="inline-code var-v-next-version">v6.7.0</code>).</label>
+                        <p class="task-text text-slate-700 leading-relaxed">Push and create a PR to <code class="inline-code">dev</code>.</p>
+                    </div>
+                </label>
+
+                <div class="task-item flex items-start gap-4 p-5">
+                    <input type="checkbox" id="ph5-4a" class="task-checkbox mt-1">
+                    <div class="flex-1">
+                        <label for="ph5-4a" class="task-text text-slate-700 leading-relaxed cursor-pointer block mb-3">Request PR review in channel:</label>
                         <div class="relative group">
-                            <button onclick="copyText('changelog-next', this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">Copy</button>
-                            <pre id="changelog-next" class="bg-slate-900 text-slate-50 p-4 rounded-lg font-mono text-sm overflow-x-auto leading-relaxed"># Release <span class="var-v-next-version text-accent">v6.7.0</span>
-### Added
-### Fixed
-### Technical Changes
-### Added Dependencies
-### Updated Dependencies</pre>
+                            <button onclick="copyText('slack-6', this)" class="absolute top-3 right-3 bg-slate-700 hover:bg-slate-600 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">Copy</button>
+                            <pre id="slack-6" class="bg-slate-900 text-slate-50 p-4 rounded-lg font-mono text-sm overflow-x-auto leading-relaxed">@channel 📢 PR REVIEW NEEDED
+Merge main into dev for <span class="var-v-express-full text-accent">v6.6.0</span>
+[PR Link]</pre>
                         </div>
                     </div>
                 </div>
 
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                    <input type="checkbox" id="ph5-4" class="task-checkbox mt-1">
+                    <input type="checkbox" id="ph5-4b" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Push and create a PR to <code class="inline-code">dev</code>. Merge it (⚠️ <span class="font-bold text-red-500">NOT squash merge</span> ⚠️).</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Merge the PR (⚠️ <span class="font-bold text-red-500">NOT squash merge</span> ⚠️).</p>
                     </div>
                 </label>
 
-                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                    <input type="checkbox" id="ph5-5" class="task-checkbox mt-1">
-                    <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed"><strong>Ensure there are no other open PRs targeting the <code class="inline-code">development</code> branch.</strong> If any exist, ask the owner to either merge or skip them.</p>
-                    </div>
-                </label>
-
-                <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
-                    <input type="checkbox" id="ph5-6" class="task-checkbox mt-1">
-                    <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Create new milestone <code class="inline-code var-v-next-version">v6.7.0</code> on GitHub.</p>
-                    </div>
-                </label>
 
                 <div class="task-item flex items-start gap-4 p-5">
                     <input type="checkbox" id="ph5-7" class="task-checkbox mt-1">
@@ -696,10 +860,10 @@ This is critical for the final Express release. Please review ASAP.</pre>
                             <pre id="slack-5" class="bg-slate-900 text-slate-50 p-4 rounded-lg font-mono text-sm overflow-x-auto leading-relaxed">@channel ✅ PROCESS COMPLETED SUCCESSFULLY! 🎉
 
 Express <span class="var-v-express-full text-accent">v6.6.0</span> (Cycle <span class="var-cycle text-accent">74</span>) has been successfully released and shared with SuperApp.
-📚 *Express Version* : `<span class="var-express-lib text-accent">6.6.0</span>`
+📚 *Express Version* : `<span class="var-express-lib text-accent">6.6.0</span>`<span id="next-rm-text">
 
 The next *Release Manager* is &lt;@<span class="var-next-rm text-accent">U_ID_HERE</span>&gt;.
-Please make sure all PRs target the `dev` branch and are merged till Friday EOD.</pre>
+Please make sure all PRs target the `dev` branch and are merged till Friday EOD.</span></pre>
                         </div>
                     </div>
                 </div>
@@ -707,21 +871,12 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
                 <label class="task-item flex items-start gap-4 p-5 cursor-pointer">
                     <input type="checkbox" id="ph5-8" class="task-checkbox mt-1">
                     <div class="flex-1">
-                        <p class="task-text text-slate-700 leading-relaxed">Update tracking documents: <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="text-accent hover:underline font-medium">Android Express Branches</a> & <a href="https://www.notion.so/238f03bdfe1b8084ba82cad2f0e0d1c9" target="_blank" class="text-accent hover:underline font-medium">Teams Working Schedule</a>.</p>
+                        <p class="task-text text-slate-700 leading-relaxed">Update tracking document: <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="text-accent hover:underline font-medium">Android Express Branches</a>.</p>
                     </div>
                 </label>
 
             </div>
-        </div>
-
-        <!-- Quick Links Footer -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-slate-600 mb-12">
-            <a href="https://www.notion.so/12ff03bdfe1b80228987fb73ab042991" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🌿 Express Branches</a>
-            <a href="https://www.notion.so/5714e46a14fb452395fa662c5b6bda3c" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">📊 SuperApp Releases</a>
-            <a href="https://app.bitrise.io/app/2252b093-8597-46bb-b443-6696a9276bb3" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔨 Bitrise Express</a>
-            <a href="https://app.bitrise.io/app/48a65bcd7293de7a" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔨 Bitrise SuperApp</a>
-            <a href="https://github.com/YAtechnologies/yassir-express-client-revamp/releases" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🐙 GitHub Releases</a>
-            <a href="https://console.firebase.google.com/project/ysr-superapp-fb-qa/appdistribution/app/android:com.yatechnologies.yassir_rider.preprod/releases" target="_blank" class="bg-white p-3 rounded-lg border border-slate-200 hover:border-accent hover:text-accent transition-colors flex items-center gap-2 shadow-sm">🔥 Firebase Console</a>
+            </div>
         </div>
 
     </main>
@@ -746,7 +901,7 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             const code = inputs.code.value || '466';
             const alphaSuffix = inputs.alphaSuffix.value || '0-alpha1';
             const finalSuffix = inputs.finalSuffix?.value || '0';
-            const nextRm = inputs.nextRm.value || 'U_ID_HERE';
+            const nextRm = inputs.nextRm.value || '';
 
             const expressFull = express + '.0';
             const expressLib = expressFull + '.' + finalSuffix;
@@ -778,6 +933,15 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
             document.querySelectorAll('.var-superapp-full').forEach(el => el.textContent = superApp + '.0');
             document.querySelectorAll('.var-v-next-version').forEach(el => el.textContent = 'v' + nextVersion);
             document.querySelectorAll('.var-next-rm').forEach(el => el.textContent = nextRm);
+            
+            const nextRmText = document.getElementById('next-rm-text');
+            if (nextRmText) {
+                if (nextRm && nextRm.trim() !== '') {
+                    nextRmText.style.display = 'inline';
+                } else {
+                    nextRmText.style.display = 'none';
+                }
+            }
 
             Object.keys(inputs).forEach(key => {
                 localStorage.setItem('setting-' + key, inputs[key].value);
@@ -815,6 +979,30 @@ Please make sure all PRs target the `dev` branch and are merged till Friday EOD.
                 progressFill.classList.add('bg-accent');
                 progressFill.classList.remove('bg-success');
             }
+
+            // Update phase progress badges
+            document.querySelectorAll('.phase-section').forEach(section => {
+                const phaseCheckboxes = section.querySelectorAll('.task-checkbox');
+                if (phaseCheckboxes.length > 0) {
+                    const phaseChecked = section.querySelectorAll('.task-checkbox:checked').length;
+                    const badge = section.querySelector('.phase-progress');
+                    if (badge) {
+                        badge.textContent = `${phaseChecked}/${phaseCheckboxes.length}`;
+                        if (phaseChecked === phaseCheckboxes.length) {
+                            badge.classList.remove('text-indigo-600', 'bg-indigo-50', 'border-indigo-100');
+                            badge.classList.add('text-emerald-600', 'bg-emerald-50', 'border-emerald-100');
+                        } else {
+                            badge.classList.add('text-indigo-600', 'bg-indigo-50', 'border-indigo-100');
+                            badge.classList.remove('text-emerald-600', 'bg-emerald-50', 'border-emerald-100');
+                        }
+                    }
+                }
+            });
+        }
+
+        function togglePhase(headerElement) {
+            const section = headerElement.closest('.phase-section');
+            section.classList.toggle('is-collapsed');
         }
 
         checkboxes.forEach(cb => {
